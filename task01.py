@@ -61,4 +61,38 @@ Enter in the scores for 10 students for Assignment 2:
 
 """
 
-import json
+
+class task1:
+    def __init__(self):
+        self.part2()
+
+    def part1(self):
+        choice = input("Enter your choice")
+        value = input("Enter in the assignment ID:")
+        print("Enter in the scores for the 10 students for Assignment 2:")
+
+    def part2(self):
+        import json
+        choice = input("Enter your choice")
+        id = input("Enter in the assignment ID:")
+        print("Enter in the scores for the 10 students for Assignment 2:")
+
+        score = {}
+        score["Assignment Value"] = id
+        score["Assignment Name"] = name
+        print(score)
+
+        for i in range(1,11):
+            score[i] = input(f"{i}: ")
+        print(score)
+            
+            
+        print("Complete.")
+
+        encoded = json.dumps(score)
+        data = open(f"{name}.txt","w")
+        data.write(f"{encoded}")
+        data.close()
+    
+
+task1()
