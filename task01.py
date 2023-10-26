@@ -64,35 +64,49 @@ Enter in the scores for 10 students for Assignment 2:
 
 class task1:
     def __init__(self):
-        self.part2()
+        print("1. Create and Assignment")
+        print("2. Enter in Assignment Scores")
+        print("3. Write your data to file")
+        choice = input("\nEnter your choice: ")
+        if choice == "1":
+            self.choice1()
+        if choice == "2":
+            self.choice2()
 
-    def part1(self):
-        choice = input("Enter your choice")
-        value = input("Enter in the assignment ID:")
-        print("Enter in the scores for the 10 students for Assignment 2:")
-
-    def part2(self):
+    def choice1(self):
         import json
-        choice = input("Enter your choice")
-        id = input("Enter in the assignment ID:")
-        print("Enter in the scores for the 10 students for Assignment 2:")
+        name = input("Enter the assignment name:")
+        value = input("Enter the assignment value:")
+        line = open("data.csv","r").read().split("\n")
+        info = json.dumps({"id":len(line)-1,"assignmentName" : name, "assignmentValue" : value})
+        print(f"Your assignment has been assigned ID {len(line)-1}")
+        data = open("data.csv","a")
+        data.write(f"{info}\n")
+        data.close()
 
-        score = {}
-        score["Assignment Value"] = id
-        score["Assignment Name"] = name
-        print(score)
+    def choice2(self):
+        import json
+        students = []
+        id = int(input("Enter in the assignment ID:"))
+        
+        line = open("data.csv","r").read().split("\n")
+        x = json.loads(line[id])
+        name = x['assignmentName']
+        
+        print(f"Enter in the scores for the 10 students for {name}:")
 
         for i in range(1,11):
-            score[i] = input(f"{i}: ")
-        print(score)
-            
-            
+            grade = input(f"{i}: ")
+            x[f"{i}"] = grade
+        
+        print(x)
+
+        data = open("data.csv","w")
+        data.write(line)
+        data.close()
         print("Complete.")
 
-        encoded = json.dumps(score)
-        data = open(f"{name}.txt","w")
-        data.write(f"{encoded}")
-        data.close()
+    
     
 
 task1()
