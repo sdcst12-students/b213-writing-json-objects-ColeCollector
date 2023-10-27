@@ -64,14 +64,16 @@ Enter in the scores for 10 students for Assignment 2:
 
 class task1:
     def __init__(self):
-        print("1. Create and Assignment")
-        print("2. Enter in Assignment Scores")
-        print("3. Write your data to file")
-        choice = input("\nEnter your choice: ")
-        if choice == "1":
-            self.choice1()
-        if choice == "2":
-            self.choice2()
+        while True:
+            print("\n\n\n1. Create an Assignment")
+            print("2. Enter in Assignment Scores")
+            choice = input("\nEnter your choice: ")
+            if choice == "1":
+                self.choice1()
+            elif choice == "2":
+                self.choice2()
+            else:
+                print("That's not a valid choice")
 
     def choice1(self):
         import json
@@ -86,10 +88,13 @@ class task1:
 
     def choice2(self):
         import json
-        students = []
         id = int(input("Enter in the assignment ID:"))
-        
         line = open("data.csv","r").read().split("\n")
+        
+        if len(line)-2 < id:
+            print("ID is too high")
+            exit()
+
         x = json.loads(line[id])
         name = x['assignmentName']
         
@@ -98,15 +103,16 @@ class task1:
         for i in range(1,11):
             grade = input(f"{i}: ")
             x[f"{i}"] = grade
-        
-        print(x)
-
+    
         data = open("data.csv","w")
-        data.write(line)
+        for i in line:
+            if line.index(i) == id:
+                data.write(f"{x}\n")
+
+            elif i!="":
+                data.write(f"{i}\n")
+
         data.close()
         print("Complete.")
-
-    
-    
 
 task1()
