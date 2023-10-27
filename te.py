@@ -1,5 +1,3 @@
-
-
 line = open("data.csv","r").read().split("\n")
 
 
