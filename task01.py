@@ -67,11 +67,14 @@ class task1:
         while True:
             print("\n\n\n1. Create an Assignment")
             print("2. Enter in Assignment Scores")
+            print("3. View Scores")
             choice = input("\nEnter your choice: ")
             if choice == "1":
                 self.choice1()
             elif choice == "2":
                 self.choice2()
+            elif choice == "3":
+                self.choice3()
             else:
                 print("That's not a valid choice")
 
@@ -103,16 +106,22 @@ class task1:
         for i in range(1,11):
             grade = input(f"{i}: ")
             x[f"{i}"] = grade
-    
+
+        updated = f"{x}\n".replace("'",'"')
+
         data = open("data.csv","w")
         for i in line:
             if line.index(i) == id:
-                data.write(f"{x}\n")
+                data.write(updated)
 
             elif i!="":
                 data.write(f"{i}\n")
 
         data.close()
         print("Complete.")
+    def choice3(self):
+        data = open("data.csv","r").read()
+        print(data)
+
 
 task1()
